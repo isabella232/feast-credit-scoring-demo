@@ -11,4 +11,5 @@ __pycache__/
 
 # feature store registry & settings
 feature_store_*
-./creditscore/data/registry.db
+creditscore/data/registry.db
+creditscore/data/online_store.db

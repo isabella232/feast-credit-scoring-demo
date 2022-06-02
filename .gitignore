@@ -1,1 +1,14 @@
+# byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# streamlit secrets
 .streamlit/secrets.toml
+
+# environments
+.venv
+
+# feature store registry & settings
+feature_store_*
+./creditscore/data/registry.db

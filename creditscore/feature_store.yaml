@@ -1,0 +1,8 @@
+project: creditscore
+registry: data/registry.db
+provider: local
+online_store:
+    type: redis
+    # for Azure:
+    # connection_string: <dns_name>.redis.cache.windows.net:6379,password=<pwd>
+    

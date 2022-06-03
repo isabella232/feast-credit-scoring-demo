@@ -12,7 +12,8 @@ from credit_model import CreditScoringModel
 st.set_page_config(layout="wide")
 model = CreditScoringModel(st.secrets.get("redis_connection_string"))
 if not model.is_model_trained():
-    raise Exception("The credit scoring model has not been trained. Please run run.py.")
+    raise Exception(
+        "The credit scoring model has not been trained. Please run run.py.")
 
 
 def get_loan_request():
@@ -47,7 +48,8 @@ def get_loan_request():
     )
 
     amount = st.sidebar.slider("Loan amount", 0, 100000, 10000)
-    interest = st.sidebar.slider("Preferred interest rate", 1.0, 25.0, 12.0, step=0.1)
+    interest = st.sidebar.slider(
+        "Preferred interest rate", 1.0, 25.0, 12.0, step=0.1)
     return OrderedDict(
         {
             "zipcode": [int(zipcode)],
@@ -65,8 +67,8 @@ def get_loan_request():
 
 # Application
 st.title("Loan Application")
-#st.write(st.secrets.get("redis_connection_string"))
-#st.write(st.secrets.get("redis_connection_string11"))
+# st.write(st.secrets.get("redis_connection_string"))
+# st.write(st.secrets.get("redis_connection_string11"))
 
 # Input Side Bar
 st.header("User input:")
@@ -99,11 +101,13 @@ elif result == 1:
 # Feature importance
 st.header("Feature Importance")
 
+
 @st.cache
 def cache_func():
     X = pd.read_parquet("creditscore/data/training_dataset_sample.parquet")
     explainer = shap.TreeExplainer(model.classifier)
     return explainer.shap_values(X), X
+
 
 shap_values, X = cache_func()
 left, mid, right = st.columns(3)
@@ -131,8 +135,8 @@ with left:
         connection_string: yyy.cloud.redislabs.com:14783,password=xxx'''
     st.code(code, language='yaml')
 
-    st.markdown("Create your own free Redis DB at [Redis Cloud](https://app.redislabs.com/#/login)")
+    st.markdown(
+        "#### Create your own free Redis DB at [Redis Cloud](https://app.redislabs.com/#/login)")
 with mid:
-    image = Image.open('diagram.png')
+    image = Image.open('media/diagram.png')
     st.image(image, caption='Solution diagram')
-
